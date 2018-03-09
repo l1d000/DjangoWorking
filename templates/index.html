@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+  <title>{{ title }}</title>
+  <style>
+
+    html, body {
+      background-color: #E0E0E0;
+      font-family:'Roboto';
+    }
+
+    .wrapper {
+      height: 60px;
+      width: 600px;
+      border-radius: 4px;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+      margin:30px auto;
+    }
+
+    .inputbox {
+      box-sizing: border-box;
+      width: 600px;
+      height: 100%;
+      font-size: 28px;
+      background-color: #FFFFFF;
+      border: 2px solid #E1E8ED;
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+      padding: 10px;
+      float: left;
+      display: block;
+    }
+    .submit {
+      width: 460px;
+      background-color:#8E8E8E;
+      height: 100%;
+      font-size: 28px;
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+      padding: 10px;
+    }
+   
+h1 { margin:150px auto 30px auto; text-align:center; color:#fff;}
+  </style>
+
+</head>
+<body>
+<h1>{{ title }}</h1><br>
+<br>
+<br>
+
+<form class="wrapper" action="project-post" method="post">
+  {% csrf_token %}
+  <input class="inputbox" type="text" name="project_name" style='font-size:15px'></input></br></br></br><br></br></br> 
+  <input class="inputbox" type="text" name="cl_number"style='font-size:15px' ></input></br></br></br><br></br></br> 
+  <div style="*position:absolute;top:50%;_left:44%;text-align:center;">
+  <button class="submit" >Submit</button>
+  </div>
+</form>
+</body>
+</html> 
