@@ -7243,7 +7243,7 @@ button.close {
 		    xhr = new ActiveXObject('Microsoft.XMLHttp');
 		}
             
-                xhr.open('get','http://10.46.32.95:8000/get_p',true);
+                xhr.open('get','get_progress',true);
                 xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                 xhr.send( 'memberId='+ "111" + '&&password=' + "2222" );
                 xhr.onreadystatechange = function () {

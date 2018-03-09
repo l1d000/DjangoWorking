@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.shortcuts import render
 from django.views.decorators import csrf
 from django.http import HttpResponse
@@ -30,7 +29,7 @@ class ShellThread (threading.Thread):
 def shell_run(threadName, cmds):
     shell_command(cmds)
 
-def search_post(request):
+def rom_running(request):
     ctx ={}
     if running :
        print("running")
@@ -41,17 +40,21 @@ def search_post(request):
         try:
             project_info = BuildProject.objects.filter(project_Name=request.POST['project_name'])
             if project_info:
-                exe_cmd_list = "cd "+project_info[0].build_Path+";"+"mkdir "+project_info[0].project_Name+";"
+                exe_cmd_list = " cd "+project_info[0].build_Path+";"
+                exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
+                exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
                 exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
                                                             .replace("$MIRROR", project_info[0].ssh_Mirror)
-                print("exe_cmd_list")
+                exe_cmd_list += " ; repo sync -c;"
+                exe_cmd_list += project_info[0].export_Variables
+                exe_cmd_list += project_info[0].build_Command
+                print(exe_cmd_list)
                 shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
                 shell_thread.start()     
                 return render(request, "sync.html", ctx)
         except BuildProject.DoesNotExist: 
             print("null")
-#        prints = PrintThread()
-#        prints.start()
+
     ctx['title'] = 'Hello World! Please try again!'
     return render(request, "index.html", ctx)
 
