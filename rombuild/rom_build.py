@@ -8,29 +8,48 @@ import time
 import json
 from  pytools.tool_shell import shell_command
 from models import BuildProject
- 
-#class PrintThread(threading.Thread):
-#    def run(self):
-#        sync_rom.sync_rom("","/home/lidongzhou/HTC/work/Web")
 
+threadLock = threading.Lock()
+running = False
+
+class ShellThread (threading.Thread):
+    def __init__(self, threadID, name, cmds):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.cmds = cmds
+    def run(self):
+        print "Starting " + self.name
+        global running
+        running = True
+        threadLock.acquire()
+        shell_run(self.name, self.cmds)
+        threadLock.release()
+        running = False 
+def shell_run(threadName, cmds):
+    shell_command(cmds)
 
 def search_post(request):
     ctx ={}
+    if running :
+       print("running")
+       return render(request, "sync.html", ctx)
     if request.POST:
-#        ctx['rlt'] = request.POST['url']
         print(request.POST['project_name'])
         print(request.POST['cl_number'])
         try:
             project_info = BuildProject.objects.filter(project_name=request.POST['project_name'])
-            exe_cmd_list = "cd "+project_info[0].build_path+";"+"mkdir "+project_info[0].project_name+";"
-            shell_command(exe_cmd_list)
-            for i in project_info:
-                print(i.build_path)   
-         	#print(BuildProject.objects.get(project_name=request.POST['project_name']))
-            print("have")
+            if project_info:
+                exe_cmd_list = "cd "+project_info[0].build_path+";"+"mkdir "+project_info[0].project_name+";"
+                exe_cmd_list += project_info[0].sync_command.replace("$ID", "lidong_zhou").replace("$MIRROR", "shh1.aosp.git.htc.com")
+                print("exe_cmd_list")
+                shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
+                shell_thread.start()     
+                return render(request, "sync.html", ctx)
         except BuildProject.DoesNotExist: 
             print("null")
 #        prints = PrintThread()
 #        prints.start()
-    return render(request, "sync.html", ctx)
+    ctx['title'] = 'Hello World! Please try again!'
+    return render(request, "index.html", ctx)
 
