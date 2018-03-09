@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+#import view
+import rombuild.rom_build
+import rombuild.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^index', rombuild.views.index),
+    url(r'^project-post',rombuild.rom_build.search_post),
+    url(r'^$', rombuild.views.default),
+
 ]
