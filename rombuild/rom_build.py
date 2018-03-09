@@ -26,6 +26,7 @@ class ShellThread (threading.Thread):
         shell_run(self.name, self.cmds)
         threadLock.release()
         running = False 
+
 def shell_run(threadName, cmds):
     shell_command(cmds)
 

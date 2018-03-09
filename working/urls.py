@@ -22,7 +22,7 @@ import rombuild.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index', rombuild.views.index),
-    url(r'^project-post',rombuild.rom_build.search_post),
+    url(r'^running',rombuild.rom_build.search_post),
     url(r'^$', rombuild.views.default),
 
 ]
