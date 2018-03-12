@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index', rombuild.views.index),
     url(r'^running',rombuild.rom_build.rom_running),
+    url(r'^get_progress', rombuild.rom_build.get_sync_progress),
     url(r'^$', rombuild.views.default),
 
 ]

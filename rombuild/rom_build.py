@@ -5,7 +5,7 @@ from django.http import HttpResponse
 import threading
 import time
 import json
-from  pytools.tool_shell import shell_command
+from  pytools.tool_shell import shell_command, get_sync_current
 from models import BuildProject
 
 threadLock = threading.Lock()
@@ -43,11 +43,12 @@ def rom_running(request):
                 exe_cmd_list = " cd "+project_info[0].build_Path+";"
                 exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
                 exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
+                exe_cmd_list += "cd "+project_info[0].project_Name+";"
                 exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
                                                             .replace("$MIRROR", project_info[0].ssh_Mirror)
                 exe_cmd_list += " ; repo sync -c;"
-                exe_cmd_list += project_info[0].export_Variables
-                exe_cmd_list += project_info[0].build_Command
+#                exe_cmd_list += project_info[0].export_Variables
+#                exe_cmd_list += project_info[0].build_Command
                 print(exe_cmd_list)
                 shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
                 shell_thread.start()     
@@ -58,3 +59,7 @@ def rom_running(request):
     ctx['title'] = 'Hello World! Please try again!'
     return render(request, "index.html", ctx)
 
+def get_sync_progress(request):
+    num = get_sync_current()
+#    print(num)
+    return HttpResponse(json.dumps(num))

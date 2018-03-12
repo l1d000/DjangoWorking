@@ -7207,7 +7207,7 @@ button.close {
 </style>
 </head>
 <body>
-<h1>SYNC CODE</h1>
+<h1>Snyc Code</h1>
 <div id="box"></div>
 <div class="progress">
 	<div class="progress-bar progress-bar-info" id="progressbar_s" role="progressbar"
@@ -7258,13 +7258,13 @@ button.close {
         //                 404: 未找到页面或接口
         //                 xhr.responseText: 后端返回的数据
                         if(xhr.readyState == 4 && xhr.status == 200 ) {
-                            document.getElementById('box').innerHTML = xhr.responseText;
+                            document.getElementById('box').innerHTML = xhr.responseText+"%";
                             
                             var json = JSON.parse(xhr.responseText);
                             console.log(json);
                            // document.getElementById('progressbar1').style.['width']="50%";
                             document.getElementById('progressbar_s').style.width = json+"%";
-                            document.getElementById('progressbar_b').style.width = json+"%";
+                         //   document.getElementById('progressbar_b').style.width = json+"%";
                             
                         }
 
