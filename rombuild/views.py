@@ -9,6 +9,10 @@ def index(request):
     context['title'] = 'Hello World!'
     return render(request, 'index.html', context)
 
+def animation(request):
+    context          = {}
+    return render(request, 'animation.html', context)
+
 def default(request):
     context          = {}
     return render(request, 'default.html', context)

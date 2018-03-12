@@ -18,12 +18,16 @@ from django.contrib import admin
 #import view
 import rombuild.rom_build
 import rombuild.views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib import staticfiles
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index', rombuild.views.index),
     url(r'^running',rombuild.rom_build.rom_running),
     url(r'^get_progress', rombuild.rom_build.get_sync_progress),
+    url(r'^animation.html', rombuild.views.animation),
     url(r'^$', rombuild.views.default),
 
 ]
+urlpatterns += staticfiles_urlpatterns()
