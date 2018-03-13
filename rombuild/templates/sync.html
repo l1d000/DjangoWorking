@@ -7263,9 +7263,8 @@ button.close {
                             
                             var json = JSON.parse(xhr.responseText);
                             console.log(json);
-                           // document.getElementById('progressbar1').style.['width']="50%";
                             document.getElementById('progressbar_s').style.width = json+"%";
-                         //   document.getElementById('progressbar_b').style.width = json+"%";
+                            document.getElementById('progressbar_b').style.width = (json-100)+"%";
                             
                         }
 

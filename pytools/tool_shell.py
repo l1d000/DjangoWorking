@@ -11,7 +11,9 @@ sync_tmpfile =""
 
 def shell_command_old(command):
     print("hello start"+command)
-    ps = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
+#    ps = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, universal_newlines=True, shell=True)
+#source cmd didn't work in sh. need to work in bash
+    ps = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, universal_newlines=True, shell=True,executable="/bin/bash")
     while ps.poll() is None:
         line = ps.stdout.readline()  
         line = line.strip()  
@@ -27,7 +29,7 @@ def shell_command(command):
     sync_tmpfile = "/tmp/%d.tmp" % random.randint(10000,99999)
     fpWrite = open(sync_tmpfile,'w')
     print(sync_tmpfile)
-    ps = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=fpWrite, universal_newlines=True, shell=True)
+    ps = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=fpWrite, universal_newlines=True, shell=True,executable="/bin/bash")
     while True:
         fpRead = open(sync_tmpfile,'r')  
         lines = fpRead.readlines()
@@ -36,7 +38,7 @@ def shell_command(command):
         if ps.poll():
             break;
         time.sleep(3)
-    os.popen('rm -rf %s' % sync_tmpfile) 
+  #  os.popen('rm -rf %s' % sync_tmpfile) 
     print 'finished'
     return "hello"     
 
