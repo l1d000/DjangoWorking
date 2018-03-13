@@ -36,19 +36,19 @@ def rom_running(request):
        return render(request, "sync.html", ctx)
     if request.POST:
         print(request.POST['project_name'])
-        print(request.POST['cl_number'])
+        #print(request.POST['cl_number'])
         try:
             project_info = BuildProject.objects.filter(project_Name=request.POST['project_name'])
             if project_info:
                 exe_cmd_list = " cd "+project_info[0].build_Path+";"
-                exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
-                exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
+    #            exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
+    #            exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
                 exe_cmd_list += "cd "+project_info[0].project_Name+";"
-                exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
-                                                            .replace("$MIRROR", project_info[0].ssh_Mirror)
-                exe_cmd_list += " ; repo sync -c;"
-#                exe_cmd_list += project_info[0].export_Variables
-#                exe_cmd_list += project_info[0].build_Command
+    #            exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
+    #                                                        .replace("$MIRROR", project_info[0].ssh_Mirror)
+    #            exe_cmd_list += " ; repo sync -c;"
+                exe_cmd_list += project_info[0].export_Variables
+                exe_cmd_list += project_info[0].build_Command
                 print(exe_cmd_list)
                 shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
                 shell_thread.start()     

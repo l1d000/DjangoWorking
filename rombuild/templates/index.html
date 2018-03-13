@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 
   <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/bootstrap.min.js"></script>
   <style>
 
     html, body {
@@ -12,54 +14,25 @@
       background-size: cover; /*自适应浏览器*/
       font-family:'Roboto';
     }
-
-    .wrapper {
-      height: 60px;
-      width: 600px;
-      border-radius: 4px;
-      box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
-      margin:30px auto;
-    }
-
-    .inputbox {
-      box-sizing: border-box;
-      width: 600px;
-      height: 100%;
-      font-size: 28px;
-      background-color: #FFFFFF;
-      border: 2px solid #E1E8ED;
-      border-right: 0;
-      border-radius: 4px 0 0 4px;
-      padding: 10px;
-      float: left;
-      display: block;
-    }
-    .submit {
-      width: 460px;
-      background-color:#8E8E8E;
-      height: 100%;
-      font-size: 28px;
-      border-right: 0;
-      border-radius: 4px 0 0 4px;
-      padding: 10px;
-    }
-   
-h1 { margin:150px auto 30px auto; text-align:center; color:#fff;}
   </style>
 
 </head>
 <body>
-<h1>{{ title }}</h1><br>
-<br>
-<br>
+<div class="container-fluid" style="position:absolute;margin-top:10%;width: 35%;left: 5%">
+    <h1 style="color: white">Hello!</h1>
+    <form class="form-horizontal" role="form"  action="running" method="post">
+       {% csrf_token %}
+      <div class="input-group">
+       <label for="project_name" class="input-group-addon">Project Name</label>
+          <input id="project_name" type="text" name="project_name" class="form-control">
+      </div>
+      <br>
+      <center>
+        <button type="submit" class="btn btn-success">Submmit</button>
+      </center>
+    </div>
+</div>
 
-<form class="wrapper" action="running" method="post">
-  {% csrf_token %}
-  <input class="inputbox" type="text" name="project_name" style='font-size:15px'></input></br></br></br><br></br></br> 
-  <input class="inputbox" type="text" name="cl_number"style='font-size:15px' ></input></br></br></br><br></br></br> 
-  <div style="*position:absolute;top:50%;_left:44%;text-align:center;">
-  <button class="submit" >Submit</button>
-  </div>
-</form>
+
 </body>
 </html> 
