@@ -10,6 +10,7 @@ from models import BuildProject
 
 threadLock = threading.Lock()
 running = False
+current_name = ""
 
 class ShellThread (threading.Thread):
     def __init__(self, threadID, name, cmds):
@@ -31,8 +32,10 @@ def shell_run(threadName, cmds):
 
 def rom_running(request):
     ctx ={}
+    global current_name
     if running :
        print("running")
+       ctx['title'] = current_name  
        return render(request, "sync.html", ctx)
     if request.POST:
         print(request.POST['project_name'])
@@ -51,12 +54,16 @@ def rom_running(request):
                 exe_cmd_list += project_info[0].build_Command
                 print(exe_cmd_list)
                 shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
-                shell_thread.start()     
+                shell_thread.start()  
+                current_name = project_info[0].project_Name
+                ctx['title'] = current_name  
                 return render(request, "sync.html", ctx)
         except BuildProject.DoesNotExist: 
             print("null")
 
     ctx['title'] = 'Hello World! Please try again!'
+    project_names = BuildProject.objects.all()
+    ctx['project_names'] = project_names
     return render(request, "index.html", ctx)
 
 def get_sync_progress(request):
