@@ -23,8 +23,13 @@
     <form class="form-horizontal" role="form"  action="running" method="post">
        {% csrf_token %}
       <div class="input-group">
-       <label for="project_name" class="input-group-addon">Project Name</label>
-          <input id="project_name" type="text" name="project_name" class="form-control">
+       <label for="project_name" class="input-group-addon" >Project Name</label>
+          <input id="project_name" type="text" name="project_name" class="form-control" list="project_list">
+          <datalist id="project_list">
+		{% for project in project_names %}
+                <option  value="{{ project.project_Name}}" />
+		{% endfor %}
+         </datalist>
       </div>
       <br>
       <center>
