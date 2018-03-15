@@ -31,10 +31,10 @@ function myfun() {
             //                 404: 未找到页面或接口
             //                 xhr.responseText: 后端返回的数据
             if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById('box').innerHTML = xhr.responseText + "%";
+              //  document.getElementById('box').innerHTML = xhr.responseText + "%";
 
                 var json = JSON.parse(xhr.responseText);
-                console.log(json);
+              //  console.log(json);
                 document.getElementById('progressbar_s').style.width = json + "%";
                 document.getElementById('progressbar_b').style.width = (json - 100) + "%";
 

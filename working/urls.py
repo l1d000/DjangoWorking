@@ -24,9 +24,13 @@ from django.contrib import staticfiles
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index', rombuild.views.index),
-    url(r'^running',rombuild.rom_build.rom_running),
+    url(r'^login_user', rombuild.views.login_user),
+    url(r'^logout_user', rombuild.views.logout_user),
+    url(r'^running',rombuild.views.running),
     url(r'^get_progress', rombuild.rom_build.get_sync_progress),
     url(r'^animation.html', rombuild.views.animation),
+    url(r'^base.html', rombuild.views.base),
+    
     url(r'^$', rombuild.views.default),
 
 ]
