@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block js %}
-<link rel="stylesheet" href="/static/css/syncrom.css">
 
 {% endblock %}
 
 {% block content %}
 
-<div style="margin-left:70px;margin-right:70px; border-left:1px solid #babdb6; padding-left:.5em; padding-top:1px;" class="progress progress-striped active">
+<div class="progressdiv">
+<p><font size="5" face="arial" color="red">Sync code</font></p>
+<div class="progress progress-striped active">
 	<div class="progress-bar progress-bar-success" id="progressbar_s" role="progressbar"
 		 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
 		 style="width: 100%;">
@@ -19,13 +20,14 @@
 	</div>
 </div>
 
-
-<div border-top:1px solid #000 class="progress progress-striped active">
+<p><font size="5" face="arial" color="red">Building</font></p>
+<div class="progress progress-striped active">
     <div class="progress-bar progress-bar-info" id="progressbar_b" role="progressbar"
          aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
          style="width: 30%;">
         <span class="sr-only"></span>
     </div>
+</div>
 </div>
 {% endblock %}
 
