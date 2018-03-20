@@ -8,6 +8,15 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import rom_build
 
+def check_running(request, context):
+    if rom_build.get_running_status() :
+        print("running")
+        context['title'] = rom_build.get_running_project()
+        return render(request, "sync.html", context)
+    else: 
+        return render(request, 'index.html', context)    
+
+
 # Create your views here.
 def index(request):
     context          = {}
@@ -18,7 +27,7 @@ def index(request):
         print(i.project_Name)
     context['username'] = 'Hello World!'
     if  request.user.is_authenticated():
-        return render(request, 'index.html', context)
+        return check_running(request, context)
     else:
         return render(request, 'login.html', context)
 
@@ -40,6 +49,7 @@ def running(request):
         print(request.POST['project_name'])
         #print(request.POST['cl_number'])
         if rom_build.rom_running(request.POST['project_name']):
+            context['title'] = rom_build.get_running_project()
             return render(request, "sync.html", context)
         
     context['title'] = 'Hello World! Please try again!'
@@ -53,7 +63,7 @@ def login_user(request):
         context = {
                     'username': request.user.username
                 }
-        return render(request, 'index.html', context)
+        return check_running(request, context)
 
     if request.method == "POST":
         username = request.POST.get('username', False)
@@ -65,7 +75,7 @@ def login_user(request):
                 context = {
                     'username': request.user.username
                 }
-                return render(request, 'index.html', context)
+                return check_running(request, context)
             else:
                 return render(request, 'login.html', {'error_message': 'Your account has been disabled'})
         else: 
