@@ -14,6 +14,9 @@ def check_running(request, context):
         context['title'] = rom_build.get_running_project()
         return render(request, "sync.html", context)
     else: 
+        context['title'] = 'Hello World!'
+        project_names = BuildProject.objects.all()
+        context['project_names'] = project_names
         return render(request, 'index.html', context)    
 
 
