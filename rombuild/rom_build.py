@@ -43,14 +43,14 @@ def rom_running(project_name):
         project_info = BuildProject.objects.filter(project_Name=project_name)
         if project_info:
             exe_cmd_list = " cd "+project_info[0].build_Path+";"
-    #            exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
-    #            exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
+            exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
+            exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
             exe_cmd_list += "cd "+project_info[0].project_Name+";"
-    #            exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
-    #                                                        .replace("$MIRROR", project_info[0].ssh_Mirror)
-    #            exe_cmd_list += " ; repo sync -c;"
-            exe_cmd_list += project_info[0].export_Variables
-            exe_cmd_list += project_info[0].build_Command
+            exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
+                                                            .replace("$MIRROR", project_info[0].ssh_Mirror)
+            exe_cmd_list += " ; repo sync -c;"
+            #exe_cmd_list += project_info[0].export_Variables
+            #exe_cmd_list += project_info[0].build_Command
             print(exe_cmd_list)
             current_name = project_info[0].project_Name
             shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
@@ -63,6 +63,8 @@ def rom_running(project_name):
 
 
 def get_sync_progress(request):
-    num = get_sync_current()
-#    print(num)
+    num = {}
+    num["progressbar_s"] = get_sync_current()
+    num["progressbar_b"] = 0
+    print(json.dumps(num))
     return HttpResponse(json.dumps(num))

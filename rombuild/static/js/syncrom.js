@@ -35,8 +35,8 @@ function myfun() {
 
                 var json = JSON.parse(xhr.responseText);
               //  console.log(json);
-                document.getElementById('progressbar_s').style.width = json + "%";
-                document.getElementById('progressbar_b').style.width = (json - 100) + "%";
+                document.getElementById('progressbar_s').style.width = json.progressbar_s + "%";
+                document.getElementById('progressbar_b').style.width = json.progressbar_b + "%";
 
             }
 
