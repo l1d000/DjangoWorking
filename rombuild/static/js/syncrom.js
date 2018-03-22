@@ -7,7 +7,7 @@ if (window.XMLHttpRequest) {
 
 function myfun() {
     var pg = document.getElementById('pg');
-    setInterval(function(e) {
+    var timer =  setInterval(function(e) {
         //   draw();
         var xhr = '';
         if (window.XMLHttpRequest) {
@@ -37,12 +37,13 @@ function myfun() {
               //  console.log(json);
                 document.getElementById('progressbar_s').style.width = json.progressbar_s + "%";
                 document.getElementById('progressbar_b').style.width = json.progressbar_b + "%";
-
+                if (json.progressbar_b == "100")
+		     clearInterval(timer); 
             }
 
         }
     },
-    5000);
+    1000);
 
 }
 window.onload = myfun;
