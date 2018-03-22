@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse  
-from  pytools.tool_shell import shell_command
+from pytools.tool_shell import shell_command
 from django.contrib import auth
 from models import BuildProject
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
+from django.http import FileResponse 
 import json
 import rom_build
 
@@ -106,6 +107,14 @@ def base(request):
 def default(request):
     context          = {}
     return render(request, 'default.html', context)
+
+def file_down(request, page): 
+    print(page)
+    file=open(page,'rb')  
+    response =FileResponse(file)  
+    response['Content-Type']='application/octet-stream'  
+    response['Content-Disposition']='attachment;filename="bluetooth.img"'  
+    return response 
 
 def test(request):
     context          = {}

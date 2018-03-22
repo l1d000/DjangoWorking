@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^get_progress', rombuild.rom_build.get_sync_progress),
     url(r'^animation.html', rombuild.views.animation),
     url(r'^base.html', rombuild.views.base),
-    
+    url(r'^file_down/(.+)/$', rombuild.views.file_down),
     url(r'^$', rombuild.views.default),
 
 ]
