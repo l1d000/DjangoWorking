@@ -53,8 +53,8 @@ function createCell(value, text) {
 }
 
 function start(project, location) {
-  var header = document.getElementById("project");
-  header.innerText = header.innerText.replace("PROJECT", project);
+ // var header = document.getElementById("project");
+ // header.innerText = header.innerText.replace("PROJECT", project);
 
   var header = document.getElementById("header");
   header.innerText = header.innerText.replace("LOCATION", location);

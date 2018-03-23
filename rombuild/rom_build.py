@@ -43,6 +43,12 @@ def get_running_project():
     else:
         return "/home/lidongzhou/HTC/work/Web/OceanLifeUHL_Asia_AU_O81_Mainline_Sense90A1_Stable_StockUI_MR/"
 
+def get_current_path():
+    if current_path:
+        return current_path
+    else:
+        return "/home/lidongzhou/HTC/work/Web/"
+
 def rom_running(project_name):
     global current_name
     global current_path

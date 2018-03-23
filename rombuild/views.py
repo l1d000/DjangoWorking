@@ -125,14 +125,17 @@ def project_build_father(request):
 
 def project_build_out(request, page):
     context          = {}
-    if rom_build.get_running_project():
-        full_patch = rom_build.get_running_project()+page
+    if rom_build.get_current_path():
+        full_patch = rom_build.get_current_path()+page
         print(full_patch)
         if os.path.isdir(full_patch) == False:
-            return file_down(request,rom_build.get_running_project(), page)
+            return file_down(request,rom_build.get_current_path(), page)
 
         context["files"] = printFiles(full_patch)
-        context["project"] = rom_build.get_running_project()
+        if page:
+            context["project"] = page.split('/')[0] 
+        else:
+            context["project"] = "Father" 
         context["path"] = page
         return render(request, 'webfile.html', context)
     else:
