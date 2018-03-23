@@ -22,7 +22,7 @@ def check_running(request, context):
         context['title'] = 'Hello World!'
         project_names = BuildProject.objects.all()
         context['project_names'] = project_names
-        context['build_results'] = print_simple_files("/home/lidongzhou/HTC/work/Web")
+        context['build_results'] = print_simple_files(rom_build.get_current_path())
         return render(request, 'index.html', context)    
 
 
@@ -64,7 +64,7 @@ def running(request):
     context['title'] = 'Hello World! Please try again!'
     project_names = BuildProject.objects.all()
     context['project_names'] = project_names
-    context['build_results'] = print_simple_files("/home/lidongzhou/HTC/work/Web")
+    context['build_results'] = print_simple_files(rom_build.get_current_path())
     return render(request, "index.html", context)
 
 @csrf_exempt

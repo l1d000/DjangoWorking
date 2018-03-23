@@ -4,6 +4,7 @@ from django.views.decorators import csrf
 from django.http import HttpResponse
 from  pytools.tool_shell import shell_command, get_sync_current
 from models import BuildProject
+from adminconfig.models import AdminConfig
 import threading
 import time
 import json
@@ -38,17 +39,13 @@ def get_running_status():
     return running
 
 def get_running_project():
-    if current_name:
-        return current_name
-    else:
-        return "/home/lidongzhou/HTC/work/Web/OceanLifeUHL_Asia_AU_O81_Mainline_Sense90A1_Stable_StockUI_MR/"
+    return current_name
 
 def get_current_path():
-    if current_path:
-        return current_path
-    else:
-        return "/home/lidongzhou/HTC/work/Web/"
-
+    adminconfig = AdminConfig.objects.all()
+    if adminconfig:
+        return adminconfig[0].buildpath
+  
 def rom_running(project_name):
     global current_name
     global current_path
