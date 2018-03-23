@@ -131,8 +131,8 @@ def project_build_out(request, page):
         context["files"] = printFiles(full_patch)
         context["project"] = rom_build.get_running_project()
         context["path"] = page
-        return render(request, 'test.html', context)
+        return render(request, 'webfile.html', context)
     else:
         print(rom_build.get_running_project())
-        return render(request, 'test.html', context)
+        return render(request, 'webfile.html', context)
 

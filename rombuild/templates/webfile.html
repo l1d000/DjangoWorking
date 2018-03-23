@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+
+<html dir="ltr" lang="zh">
+
+<head>
+<meta charset="utf-8">
+<meta name="google" value="notranslate">
+ <script src="/static/js/webfile.js"></script>
+ <link rel="stylesheet" href="/static/css/webfile.css">
+
+<title id="title"></title>
+
+</head>
+
+<body>
+
+<div id="listingParsingErrorBox">糟糕！Google Chrome无法解读服务器所发送的数据。请<a href="http://code.google.com/p/chromium/issues/entry">报告错误</a>，并附上<a href="LOCATION">原始列表</a>。</div>
+
+<h1 id="project">PROJECT</h1>
+<h2 id="header">LOCATION 的索引</h2>
+<div id="parentDirLinkBox" style="display:none">
+  <a id="parentDirLink" class="icon up">
+    <span id="parentDirText">[上级目录]</span>
+  </a>
+</div>
+
+<table>
+  <thead>
+    <tr class="header" id="theader">
+      <th onclick="javascript:sortTable(0);">名称</th>
+      <th class="detailsColumn" onclick="javascript:sortTable(1);">
+        大小
+      </th>
+      <th class="detailsColumn" onclick="javascript:sortTable(2);">
+        修改日期
+      </th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+  </tbody>
+</table>
+
+</body>
+
+</html>
+<script src="/static/js/webfile_second.js"></script>
+<script>start("{{project}}","{{path}}");</script>
+
+<script>onHasParentDirectory();</script>
+{% for file in files %}
+</p>{{file.name1}}</p>
+<script>addRow("{{file.name}}","{{file.name}}",{{file.isdir}},0,"0 B",1521103024,"{{file.time}}");</script> 
+{% endfor %}
+
+
+
+
