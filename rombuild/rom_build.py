@@ -38,7 +38,10 @@ def get_running_status():
     return running
 
 def get_running_project():
-    return current_name
+    if current_name:
+        return current_name
+    else:
+        return "/home/lidongzhou/HTC/work/Web/OceanLifeUHL_Asia_AU_O81_Mainline_Sense90A1_Stable_StockUI_MR/"
 
 def rom_running(project_name):
     global current_name
@@ -59,6 +62,7 @@ def rom_running(project_name):
             current_name = project_info[0].project_Name
             current_path = project_info[0].build_Path+"/"+project_info[0].project_Name+"/out-log.txt"
             print(current_path)
+            return True
             shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
             shell_thread.start()
             return True

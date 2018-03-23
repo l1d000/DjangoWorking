@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.shortcuts import render
 from django.http import HttpResponse  
 from pytools.tool_shell import shell_command
@@ -6,8 +7,11 @@ from models import BuildProject
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.http import FileResponse 
+from  pytools.tool_file import printFiles
 import json
 import rom_build
+import os
+import time
 
 def check_running(request, context):
     if rom_build.get_running_status() :
@@ -108,15 +112,27 @@ def default(request):
     context          = {}
     return render(request, 'default.html', context)
 
-def file_down(request, page): 
-    print(page)
-    file=open(page,'rb')  
+def file_down(request, path, page): 
+
+    file=open(path+page,'rb')  
     response =FileResponse(file)  
     response['Content-Type']='application/octet-stream'  
-    response['Content-Disposition']='attachment;filename="bluetooth.img"'  
+    response['Content-Disposition']="attachment;filename="+page.split('/')[-1]  
     return response 
 
-def test(request):
+def project_build_out(request, page):
     context          = {}
-    shell_command("cd /home/lidongzhou/HTC/work/test;find -name *.txt")
-    return render(request, 'default.html', context)
+    if rom_build.get_running_project():
+        full_patch = rom_build.get_running_project()+page
+        print(full_patch)
+        if os.path.isdir(full_patch) == False:
+            return file_down(request,rom_build.get_running_project(), page)
+
+        context["files"] = printFiles(full_patch)
+        context["project"] = rom_build.get_running_project()
+        context["path"] = page
+        return render(request, 'test.html', context)
+    else:
+        print(rom_build.get_running_project())
+        return render(request, 'test.html', context)
+
