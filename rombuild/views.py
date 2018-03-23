@@ -132,11 +132,14 @@ def project_build_out(request, page):
             return file_down(request,rom_build.get_current_path(), page)
 
         context["files"] = printFiles(full_patch)
+#        if page:
+#            context["project"] = page.split('/')[0] 
+#        else:
+#            context["project"] = "Father" 
         if page:
-            context["project"] = page.split('/')[0] 
+            context["path"] = page
         else:
-            context["project"] = "Father" 
-        context["path"] = page
+            context["path"] = "All Projects"
         return render(request, 'webfile.html', context)
     else:
         print(rom_build.get_running_project())
