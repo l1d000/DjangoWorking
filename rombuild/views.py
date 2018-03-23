@@ -120,6 +120,9 @@ def file_down(request, path, page):
     response['Content-Disposition']="attachment;filename="+page.split('/')[-1]  
     return response 
 
+def project_build_father(request):
+    return project_build_out(request, "")
+
 def project_build_out(request, page):
     context          = {}
     if rom_build.get_running_project():
