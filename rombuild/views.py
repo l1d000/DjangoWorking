@@ -7,7 +7,7 @@ from models import BuildProject
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.http import FileResponse 
-from  pytools.tool_file import printFiles
+from  pytools.tool_file import printFiles, print_simple_files
 import json
 import rom_build
 import os
@@ -22,6 +22,7 @@ def check_running(request, context):
         context['title'] = 'Hello World!'
         project_names = BuildProject.objects.all()
         context['project_names'] = project_names
+        context['build_results'] = print_simple_files("/home/lidongzhou/HTC/work/Web")
         return render(request, 'index.html', context)    
 
 
@@ -63,6 +64,7 @@ def running(request):
     context['title'] = 'Hello World! Please try again!'
     project_names = BuildProject.objects.all()
     context['project_names'] = project_names
+    context['build_results'] = print_simple_files("/home/lidongzhou/HTC/work/Web")
     return render(request, "index.html", context)
 
 @csrf_exempt

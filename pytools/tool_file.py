@@ -32,6 +32,10 @@ def get_FileModifyTime(filePath):
     t = os.path.getmtime(filePath)
     return TimeStampToTime(t)
 
+def print_simple_files(path):
+    files = os.listdir(path)
+    return files
+
 def printFiles(path):
     print(path)
     filestruct = FileStruct()

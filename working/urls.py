@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^animation.html', rombuild.views.animation),
     url(r'^base.html', rombuild.views.base),
     
-    url(r'^resoult/(.+)/$', rombuild.views.project_build_out),
-    url(r'^resoult', rombuild.views.project_build_father),
+    url(r'^result/(.+)/$', rombuild.views.project_build_out),
+    url(r'^result', rombuild.views.project_build_father),
     url(r'^$', rombuild.views.default),
     url(r'^', rombuild.views.default),
 ]

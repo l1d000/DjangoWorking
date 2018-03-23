@@ -7,7 +7,7 @@
 {% block content %}
 
 
-<div class="container-fluid" style="position:absolute;margin-top:10%;width: 45%;left: 5%">
+<div class="container-fluid" style="position:absolute;margin-top:5%;width: 45%;left: 5%">
     <h1 style="color: white">{{ title }}</h1>
     <form class="form-horizontal" role="form"  action="running" method="post">
        {% csrf_token %}
@@ -24,6 +24,10 @@
       <center>
         <button type="submit" class="btn btn-success">Submmit</button>
       </center>
+      <h1 style="color: white">Build Roms:</h1>
+      {% for result in build_results %}
+      <a href="result"+{{result}}+"/"><font size="5" face="arial" color="green">{{result}}</font></a>
+      {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -66,7 +66,7 @@ def rom_running(project_name):
             exe_cmd_list += project_info[0].build_Command
             print(exe_cmd_list)
             current_name = project_info[0].project_Name
-            current_path = project_info[0].build_Path+"/"+project_info[0].project_Name+"/out-log.txt"
+            current_path = project_info[0].build_Path+"/"+project_info[0].project_Name
             print(current_path)
             return True
             shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)
@@ -95,8 +95,9 @@ def get_build_current(path, max_number):
 def get_sync_progress(request):
     num = {}
     num["progressbar_s"] = get_sync_current()
-    if os.path.exists(current_path):
-        num["progressbar_b"] = get_build_current(current_path, 100000)
+    path = current_path+"/out-log.txt"
+    if os.path.exists(path):
+        num["progressbar_b"] = get_build_current(path, 100000)
     else:
         num["progressbar_b"] = 0
     print(json.dumps(num))
