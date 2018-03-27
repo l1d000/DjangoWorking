@@ -42,10 +42,10 @@ def get_running_project():
     return current_name
 
 def get_current_path():
-    adminconfig = AdminConfig.objects.all()
+    adminconfig = AdminConfig.objects.filter(ConfigName="BuildPath")
     if adminconfig:
-        return adminconfig[0].buildpath
-  
+        print(adminconfig[0].Parameter)
+        return adminconfig[0].Parameter
 def rom_running(project_name):
     global current_name
     global current_path
