@@ -31,6 +31,9 @@ ALLOWED_HOSTS = ['10.46.32.95']
 # Application definition
 
 INSTALLED_APPS = [
+#    'bootstrap3',
+    'admin_bootstrapped_plus',
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
