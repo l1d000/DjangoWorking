@@ -22,7 +22,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import staticfiles
 
 urlpatterns = [
- #   url(r'^$', rombuild.views.default),
+
     url(r'^admin/', admin.site.urls),
     url(r'^index', rombuild.views.index),
     url(r'^login_user', rombuild.views.login_user),
@@ -31,10 +31,11 @@ urlpatterns = [
     url(r'^get_progress', rombuild.rom_build.get_sync_progress),
     url(r'^animation.html', rombuild.views.animation),
     url(r'^base.html', rombuild.views.base),
-    
     url(r'^result/(.+)/$', rombuild.views.project_build_out),
-    url(r'^result', rombuild.views.project_build_father),
+    url(r'^result/$', rombuild.views.project_build_father),
+#    url(r'^$', rombuild.views.default),
+#    url(r'^', rombuild.views.default),
     url(r'^$', rombuild.views.default),
-    url(r'^', rombuild.views.default),
+#    url(r'^$/', rombuild.views.default),
 ]
 urlpatterns += staticfiles_urlpatterns()
