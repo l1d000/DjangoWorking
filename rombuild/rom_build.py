@@ -2,9 +2,10 @@
 from django.shortcuts import render
 from django.views.decorators import csrf
 from django.http import HttpResponse
-from  pytools.tool_shell import shell_command, get_sync_current
+from pytools.tool_shell import shell_command, get_sync_current
 from models import BuildProject
 from adminconfig.models import AdminConfig
+from adminconfig.admin_config import get_current_path,get_current_ssh_name,get_current_ssh_mirror
 import threading
 import time
 import json
@@ -41,29 +42,26 @@ def get_running_status():
 def get_running_project():
     return current_name
 
-def get_current_path():
-    adminconfig = AdminConfig.objects.filter(ConfigName="BuildPath")
-    if adminconfig:
-        print(adminconfig[0].Parameter)
-        return adminconfig[0].Parameter
+
+
 def rom_running(project_name):
     global current_name
     global current_path
     try:
         project_info = BuildProject.objects.filter(project_Name=project_name)
         if project_info:
-            exe_cmd_list = " cd "+project_info[0].build_Path+";"
+            exe_cmd_list = " cd "+get_current_path()+";"
             exe_cmd_list += "rm  -rf "+project_info[0].project_Name+";"
             exe_cmd_list += "mkdir "+project_info[0].project_Name+";"
             exe_cmd_list += "cd "+project_info[0].project_Name+";"
-            exe_cmd_list += project_info[0].sync_Command.replace("$ID", project_info[0].ssh_Name)\
-                                                            .replace("$MIRROR", project_info[0].ssh_Mirror)
+            exe_cmd_list += project_info[0].sync_Command.replace("$ID", get_current_ssh_name())\
+                                                            .replace("$MIRROR", get_current_ssh_mirror())
             exe_cmd_list += " ; repo sync -c;"
             exe_cmd_list += project_info[0].export_Variables
             exe_cmd_list += project_info[0].build_Command
             print(exe_cmd_list)
             current_name = project_info[0].project_Name
-            current_path = project_info[0].build_Path+"/"+project_info[0].project_Name
+            current_path = get_current_path()+"/"+project_info[0].project_Name
             print(current_path)
             return True
             shell_thread = ShellThread(1, "Thread-Shell-Running", exe_cmd_list)

@@ -5,9 +5,9 @@ from django.utils.html import format_html
 # Create your models here.
 class BuildProject(models.Model):
     project_Name   = models.CharField(max_length=100)
-    build_Path   = models.CharField(max_length=100)
-    ssh_Name   = models.CharField(max_length=20)
-    ssh_Mirror   = models.CharField(max_length=50)
+#    build_Path   = models.CharField(max_length=100)
+#    ssh_Name   = models.CharField(max_length=20)
+#    ssh_Mirror   = models.CharField(max_length=50)
     sync_Command = models.CharField(max_length=100)
     export_Variables   = models.TextField()
     build_Command   = models.TextField()
