@@ -44,7 +44,7 @@ pycparser==2.14
 pycrypto==2.6.1
 pycups==1.9.73
 pycurl==7.19.5.1
-Pygments==2.0.1
+Pygments==2.7.4
 pygobject==3.16.2
 PyJWT==1.0.0
 pyliblzma==0.5.3
